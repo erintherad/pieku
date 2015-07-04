@@ -70,3 +70,30 @@ hr.small {
     background-size: cover;
     -o-background-size: cover;
 }
+
+/*Decription section*/
+.description-row {
+	color: black;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+#haikuImg {
+	background: url(img/haiku-icon.png) no-repeat;
+	display: block;	
+	width: 100px;
+	height: 100px;
+}
+
+div #piekuImg {
+	background-image: url(img/haiku-icon.png) no-repeat;
+	width: 100px;
+	height: 100px;
+}
+
+div #pieImg {
+	background-image: url(img/pie-icon.png) no-repeat;	
+	width: 100px;
+	height: 100px;
+}
+
