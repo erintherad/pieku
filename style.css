@@ -7,10 +7,11 @@ body {
 
 body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: white;
+    color: black;
 }
 
 .text-vertical-center {
+	color: white;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -73,7 +74,6 @@ hr.small {
 
 /*Decription section*/
 .description-row {
-	color: black;
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
@@ -104,10 +104,12 @@ hr.small {
  	background-size: 70%; 	
 }
 
-/*pieku list layout section*/
-.pieku-list-layout {
-	color: black;
+p.symbol {
+	font-size: 4em;
+	margin-top: 40px;
 }
+
+/*pieku list layout section*/
 .piekuListImg {
 	background: url(img/pieku-icon.png) no-repeat;
 	display: block;	

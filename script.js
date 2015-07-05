@@ -1,4 +1,7 @@
-$(function() {
+$(function() {	
+
+	// form to create new pieku post
+	var $newPost = $('#new-post');
 
 	// element to hold the list of piekus
 	var $pieList = $('#pieku-list-panel')
@@ -21,8 +24,32 @@ $(function() {
 		$pieList.append($post);
 	});
 
+	// submit form to create new todo
+	$newPost.on('submit', function(event) {
+		event.preventDefault();
 
+		// create new todo object from form data
+		var postTitle = $('#post-title').val();
+		var postAuthor = $('#post-author').val();
+		var postDesc = $('#post-desc').val();
+		var postData = {title: postTitle, author: postAuthor, post: postDesc};
 
+		// store our new post
+		posts.push(postData);
+		var index = posts.indexOf(postData);
 
+		// append our new post to the page
+		var $post = $(postTemplate(postData));
+		$post.attr('data-index', index);
+		$pieList.append($post);
+
+		// hides modal and give alert upon submit
+		$('#myModal').modal('hide');
+		alert("Successfully submitted.")
+
+		// reset the form
+		$newPost[0].reset();
+		$('#post-desc').focus();
+	});
 	
 });
