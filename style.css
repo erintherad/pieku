@@ -104,3 +104,20 @@ hr.small {
  	background-size: 70%; 	
 }
 
+/*pieku list layout section*/
+.pieku-list-layout {
+	color: black;
+}
+.piekuListImg {
+	background: url(img/pieku-icon.png) no-repeat;
+	display: block;	
+ 	width: 200px;
+  	height: 200px;
+  	margin-top: 40px;
+  	margin-left: 51px;
+  	background-size: 70%;
+}
+.panel-body {
+	margin-top: 80px; 
+}
+
