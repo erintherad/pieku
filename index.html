@@ -24,7 +24,7 @@
 
 <body>
 	<!-- navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" id="topNavbar">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -34,14 +34,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Pieku</a>
+				<a class="navbar-brand" href="#"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">About </a></li>
-					<li><a href="#">Piekus</a></li>
+					<li><a href="#about">About </a></li>
+					<li><a href="#piekus">Piekus</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -51,7 +51,7 @@
 	<!-- Header -->
 	<header id="top" class="header">
 		<div class="text-vertical-center">
-			<h1>Pieku</h1>
+			<h1 style="margin-top: 60px">Pieku</h1>
 			<h3>For the love of poetry and pie.</h3>
 			<br>
 			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Create a pieku!</a>
@@ -87,7 +87,7 @@
 				</div>
 
 	<!-- Description section -->
-	<div class="description-row text-center">
+	<div class="description-row text-center" id="about">
 		<div class="container-fluid">
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
@@ -114,15 +114,46 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+	<hr id="piekus">
 
 	<!-- Pieku list layout -->
+	<div class="col-md-12 space"></div>
 	<div class="pieku-list-layout">
+		<h3 class="col-md-12 text-center">List of piekus</h3>
 		<div class="container-fluid">
-			<div class="col-md-2"></div>
-			<div class="col-md-2 pieku-list-nav"></div>
+			<!-- space -->
 			<div class="col-md-1"></div>
-			<div class="col-md-5" id="pieku-list-panel"></div> 
+			<!-- left-aligned navbar -->
+			<div class="col-md-3 pieku-list-nav">
+				<nav class="navbar navbar-default leftbar" id="leftNavbar" role="navigation">
+					<!-- Brand and toggle get grouped for better mobile display -->
+				  <div class="navbar-header leftbar">
+				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				      <span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				    </button>
+				    <a class="navbar-brand" href="#">Pieku</a>
+				  </div>
+				  <!-- Collect the nav links, forms, and other content for toggling -->
+				  <div class="collapse navbar-collapse navbar-ex1-collapse leftbar">
+				    <ul class="nav navbar-nav leftbar">
+				      <li><a href="">About</a></li>
+				      <li class="active"><a href="">Piekus</a></li>
+				      <li><a href="">Contact</a></li>
+				    </ul>
+				  </div><!-- /.navbar-collapse -->
+				</nav>
+			</div>
+			<!-- space -->
+			<div class="col-md-1"></div>
+			<!-- Where new pieku posts are added -->
+			<div class="col-md-4" id="pieku-list-panel"></div> 
+			<!-- Addition features of each post -->
 			<div class="col-md-2"></div>
+			<!-- space -->
+			<div class="col-md-1"></div>
 		</div>
 	</div>
 
@@ -140,20 +171,27 @@
 
 	<!-- underscore template -->
 	<script type="text/template" id="post-template">
-		<div class="panel panel-default">
-			<div class="panel-heading text-center">
+		<div class="panel panel-default col-md-12 text-center">
+			<div class="panel-heading">
 				<p>
 					<h1><%= title %></h1>
 				</p>
 				<p>	
 					<span><%= author %></span>
 				</p>
-			</div>	
-			<div class="panel-body piekuListImg">
-				<p>
-					<span><%= post %></span>
-				</p>
 			</div>
+			<table class="table table-condensed">
+				<div class= "panel-body">	
+					<tr>
+						<th>
+							<img class="piekuListImg"></img>
+						<th>
+						<th>
+							<span><%= post %></span>
+						</th>
+					</tr>
+				</div>
+			</table>
 		</div>
 	</script>
 

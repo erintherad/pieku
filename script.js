@@ -3,8 +3,17 @@ $(function() {
 	// form to create new pieku post
 	var $newPost = $('#new-post');
 
+	// about button scrollspy
+	var$aboutBtn = $('#about-btn');
+
 	// element to hold the list of piekus
-	var $pieList = $('#pieku-list-panel')
+	var $pieList = $('#pieku-list-panel');
+
+	// Top navbar element
+	var $topNavbar = $('#topNavbar');
+
+	// Left navbar element
+	var $leftNavbar = $('#leftNavbar');
 	
 	// post template
 	var postTemplate = _.template($('#post-template').html());
@@ -51,5 +60,18 @@ $(function() {
 		$newPost[0].reset();
 		$('#post-desc').focus();
 	});
-	
+
+	// scroll event to fade out top navbar and fade in left navbar
+
+	$(window).scroll(function(event) {
+		var yScroll = $(window).scrollTop();
+		var yPiekus = $("#piekus").offset();
+		if(yScroll > yPiekus.top){
+			$topNavbar.fadeOut();
+			$leftNavbar.fadeIn();
+		} else {
+			$topNavbar.fadeIn();
+			$leftNavbar.fadeOut();
+		}
+	});
 });

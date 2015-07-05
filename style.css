@@ -6,6 +6,7 @@ body {
 }
 
 body {
+	position: relative;
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
 }
@@ -15,6 +16,7 @@ body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+    margin-top: 40px;
 }
 
 .text-vertical-center h1 {
@@ -72,6 +74,24 @@ hr.small {
     -o-background-size: cover;
 }
 
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+	background: url(img/pieku-logo-set.png) no-repeat;
+	background-size: 100%;
+	margin-left: 5px;
+	margin-top: 8px;
+	margin-bottom: -10px;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand:hover,
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand:focus,
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand:active {
+	background: url(img/pieku-logo-hover.png) no-repeat;
+	background-size: 100%;
+	margin-left: 5px;
+	margin-top: 8px;
+	margin-bottom: -10px;
+}
+
 /*Decription section*/
 .description-row {
 	padding-top: 100px;
@@ -81,51 +101,95 @@ hr.small {
 #haikuImg {
 	background: url(img/haiku-icon.png) no-repeat;
 	display: block;	
-	width: 175px;
- 	height: 175px;
- 	margin-left: 51px;
-}
-
-#piekuImg {
-	background: url(img/pieku-icon.png) no-repeat;
-	display: block;	
- 	width: 200px;
-  	height: 200px;
-  	margin-left: 51px;
-  	background-size: 70%;
+	width: 125px;
+ 	height: 125px;
+ 	margin-left: 61px;
+ 	margin-bottom: 30px;
 }
 
 #pieImg {
 	background: url(img/pie-icon.png) no-repeat;	
 	display: block;		
-	width: 175px;
-  	height: 175px;
- 	margin-left: 28px; 
- 	background-size: 70%; 	
+	width: 125px;
+  	height: 125px;	
+  	margin-left: 54px;
+  	margin-bottom: -10px;
+  	margin-top: 30px;
+}
+
+#piekuImg {
+	background: url(img/pieku-icon.png) no-repeat;
+	display: block;	
+ 	width: 125px;
+  	height: 125px;
+  	margin-left: 64px;
+  	margin-bottom: -10px;
+  	margin-top: 30px;
 }
 
 p.symbol {
 	font-size: 4em;
-	margin-top: 40px;
+	margin-top: 70px;
+}
+
+#piekus {
+	margin-bottom: 50px;
+}
+
+/*navbar left*/
+@media (min-width: 768px) {
+	.navbar-collapse.leftbar {
+	height: auto;
+	border-top: 0;
+	box-shadow: none;
+	max-height: none;
+	padding-left:0;
+	padding-right:0;
+	}
+	.navbar-collapse.collapse.leftbar {
+	display: block !important;
+	width: auto !important;
+	padding-bottom: 0;
+	overflow: visible !important;
+	}
+	.navbar-collapse.in .leftbar{
+	overflow-x: visible;
+	}
+
+	.navbar.leftbar
+	{
+		max-width:200px;
+		margin-right: 0;
+		margin-left: 0;
+	}	
+
+	.navbar-nav.leftbar,
+	.navbar-nav.leftbar > li,
+	.navbar-left.leftbar,
+	.navbar-right.leftbar,
+	.navbar-header.leftbar
+	{float:none !important;}
+
 }
 
 /*pieku list layout section*/
+.space {
+	margin-top: 50px;
+}
 .piekuListImg {
 	background: url(img/pieku-icon.png) no-repeat;
+	border: 0;
 	display: block;	
- 	width: 200px;
-  	height: 200px;
-  	margin-top: 40px;
-  	margin-left: 51px;
-  	background-size: 70%;
+ 	width: 125px;
+  	height: 125px;
+  	border-top-color: none;
 }
-.panel-body {
-	margin-top: 80px;
-	display: block;
+
+table {
+	border-top-color: none;
 }
 
 .panel-body p {
-	width: 200px;
-	margin-left: 250px;
+	display: block;
 }
 
