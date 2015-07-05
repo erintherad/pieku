@@ -81,19 +81,26 @@ hr.small {
 #haikuImg {
 	background: url(img/haiku-icon.png) no-repeat;
 	display: block;	
-	width: 100px;
-	height: 100px;
+	width: 175px;
+ 	height: 175px;
+ 	margin-left: 51px;
 }
 
-div #piekuImg {
-	background-image: url(img/haiku-icon.png) no-repeat;
-	width: 100px;
-	height: 100px;
+#piekuImg {
+	background: url(img/pieku-icon.png) no-repeat;
+	display: block;	
+ 	width: 200px;
+  	height: 200px;
+  	margin-left: 51px;
+  	background-size: 70%;
 }
 
-div #pieImg {
-	background-image: url(img/pie-icon.png) no-repeat;	
-	width: 100px;
-	height: 100px;
+#pieImg {
+	background: url(img/pie-icon.png) no-repeat;	
+	display: block;		
+	width: 175px;
+  	height: 175px;
+ 	margin-left: 28px; 
+ 	background-size: 70%; 	
 }
 
