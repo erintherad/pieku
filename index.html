@@ -62,31 +62,31 @@
 
 	<!-- modal window -->
 	<div id="myModal" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">CREATE A PIEKU!</h4>	
-							</div>
-							<form class="text-center myForm" id="new-post">
-								<div class="modal-body">
-									<div class="form-group">
-										<input class="form-control" id="post-title" placeholder="Title">
-									</div>
-									<div class="form-group">
-										<input class="form-control" id="post-author" placeholder="Author">
-									</div>
-									<div class="form-group">
-										<textarea class="form-control" id="post-desc" rows="3" placeholder="Create your pieku here." required autofocus></textarea>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
-									<button type="submit" class="btn btn-primary" id="submitButton">CREATE YOUR PIEKU!</button>
-								</div>
-							</form>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">CREATE A PIEKU!</h4>	
+				</div>
+				<form class="text-center myForm" id="new-post">
+					<div class="modal-body">
+						<div class="form-group">
+							<input class="form-control" id="post-title" placeholder="Title">
+						</div>
+						<div class="form-group">
+							<input class="form-control" id="post-author" placeholder="Author">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" id="post-desc" rows="3" placeholder="Create your pieku here." required autofocus></textarea>
 						</div>
 					</div>
-				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+						<button type="submit" class="btn btn-primary" id="submitButton">CREATE YOUR PIEKU!</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 	<!-- Description section -->
 	<div class="description-row text-center" id="about">
@@ -128,25 +128,25 @@
 			<div class="col-md-3 pieku-list-nav">
 				<nav class="navbar navbar-default leftbar" role="navigation">
 					<!-- Brand and toggle get grouped for better mobile display -->
-				  <div class="navbar-header leftbar">
-				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				      <span class="sr-only">Toggle navigation</span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				    </button>
-				    <a class="navbar-brand" href="#">
-        				<img alt="Brand" src="img/pieku-icon-sm.png" id="leftnavbar-icon" class="text-left">
-      				</a>
-				  </div>
-				  <!-- Collect the nav links, forms, and other content for toggling -->
-				  <div class="collapse navbar-collapse navbar-ex1-collapse leftbar">
-				    <ul class="nav navbar-nav leftbar">
-				      <li><a href="">About</a></li>
-				      <li class="active"><a href="">Piekus</a></li>
-				      <li><a href="">Contact</a></li>
-				    </ul>
-				  </div><!-- /.navbar-collapse -->
+					<div class="navbar-header leftbar">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">
+							<img alt="Brand" src="img/pieku-icon-sm.png" id="leftnavbar-icon" class="text-left">
+						</a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-ex1-collapse leftbar">
+						<ul class="nav navbar-nav leftbar">
+							<li><a href="">About</a></li>
+							<li class="active"><a href="">Piekus</a></li>
+							<li><a href="">Contact</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
 				</nav>
 			</div>
 			<!-- space -->
@@ -174,23 +174,22 @@
 
 	<!-- underscore template -->
 	<script type="text/template" id="post-template">
-		<div class="col-md-12 text-center">
+		<div class="col-md-12 text-center post">
 			<div class="panel-heading">
+				<button type="button" class="close delete" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<p>
 					<h1><%= title %></h1>
 				</p>
 				<p>	
 					<span><%= author %></span>
 				</p>
+				<p class="glyphicon glyphicon-time"><%= time %></p> 
 			</div>
-				<div class= "panel-body">	
+			<div class= "panel-body">	
 				<p>
 					<span><%= post %></span>
-				</p>	
-				<p>
-					<input class="glyphicon glyphicon-time" type="hidden" name="myDate"></input> 
-				</p>					
-				</div>
+				</p>						
+			</div>
 		</div>
 	</script>
 
