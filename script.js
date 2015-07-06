@@ -20,9 +20,9 @@ $(function() {
 
 	// sample posts
 	var posts = [
-		{title:"For the love of pie 1" , author: "Erin Mahoney", post: "When I look at it" + "<br>" + "The circle becomes a slice" + "<br>" + "I eat the whole pie."},
-		{title:"For the love of pie 2" , author: "Erin Mahoney", post: "When I look at it" + "<br>" + "The circle becomes a slice" + "<br>" + "I eat the whole pie."},
-		{title:"For the love of pie 3" , author: "Erin Mahoney", post: "When I look at it" + "<br>" + "The circle becomes a slice" + "<br>" + "I eat the whole pie."}
+		{title:"For the love of pie" , author: "Erin Mahoney", post: "When I look at it," + "<br>" + "The circle becomes a slice," + "<br>" + "I eat the whole pie."},
+		{title:"Pie in the sky" , author: "Bob Smith", post: "Oh pie in the sky," + "<br>" + "You look too bright to eat now," + "<br>" + "The full moon is now"},
+		{title:"Pie for no one" , author: "Annie Ross", post: "Alone I stand here," + "<br>" + "Hunger sounds from my stomach," + "<br>" + "No pie to be found."}
 	];
 
 	// append existing posts (from posts) to $pieList.
@@ -56,13 +56,16 @@ $(function() {
 		$('#myModal').modal('hide');
 		alert("Successfully submitted.")
 
+	// adds date to post
+	var $dateStamp = $('#dateStamp');
+	$dateStamp.value = (new Date()).format("m/dd/yy");
+
 		// reset the form
 		$newPost[0].reset();
 		$('#post-desc').focus();
 	});
 
 	// scroll event to fade out top navbar and fade in left navbar
-
 	$(window).scroll(function(event) {
 		var yScroll = $(window).scrollTop();
 		var yPiekus = $("#piekus").offset();

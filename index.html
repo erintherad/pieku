@@ -18,6 +18,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<link rel="pieku icon" href="img/pieku-icon-sm.png">
+
 	<title>Pieku</title>
 
 </head>
@@ -65,7 +67,7 @@
 							<div class="modal-header">
 								<h4 class="modal-title">CREATE A PIEKU!</h4>	
 							</div>
-							<form class="text-center" id="new-post">
+							<form class="text-center myForm" id="new-post">
 								<div class="modal-body">
 									<div class="form-group">
 										<input class="form-control" id="post-title" placeholder="Title">
@@ -124,7 +126,7 @@
 			<div class="col-md-1"></div>
 			<!-- left-aligned navbar -->
 			<div class="col-md-3 pieku-list-nav">
-				<nav class="navbar leftbar" role="navigation">
+				<nav class="navbar navbar-default leftbar" role="navigation">
 					<!-- Brand and toggle get grouped for better mobile display -->
 				  <div class="navbar-header leftbar">
 				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -181,11 +183,14 @@
 					<span><%= author %></span>
 				</p>
 			</div>
-			<table class="table table-condensed">
 				<div class= "panel-body">	
+				<p>
 					<span><%= post %></span>
+				</p>	
+				<p>
+					<input class="glyphicon glyphicon-time" type="hidden" name="myDate"></input> 
+				</p>					
 				</div>
-			</table>
 		</div>
 	</script>
 
