@@ -50,7 +50,7 @@ $(function() {
 		// append our new post to the page
 		var $post = $(postTemplate(postData));
 		$post.attr('data-index', index);
-		$pieList.append($post);
+		$pieList.prepend($post);
 
 		// hides modal and give alert upon submit
 		$('#myModal').modal('hide');

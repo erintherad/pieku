@@ -40,9 +40,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">About </a></li>
-					<li><a href="#piekus">Piekus</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="#about">ABOUT </a></li>
+					<li><a href="#piekus">PIEKU</a></li>
+					<li><a href="">CONTACT</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -51,10 +51,10 @@
 	<!-- Header -->
 	<header id="top" class="header">
 		<div class="text-vertical-center">
-			<h1 style="margin-top: 60px">Pieku</h1>
-			<h3>For the love of poetry and pie.</h3>
+			<h1 style="margin-top: 60px">PIEKU</h1>
+			<h3>FOR THE LOVE OF POETRY AND PIE.</h3>
 			<br>
-			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">Create a pieku!</a>
+			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">CREATE A PIEKU!</a>
 		</div>
 	</header>
 
@@ -63,7 +63,7 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h4 class="modal-title">Create a pieku!</h4>	
+								<h4 class="modal-title">CREATE A PIEKU!</h4>	
 							</div>
 							<form class="text-center" id="new-post">
 								<div class="modal-body">
@@ -78,8 +78,8 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary" id="submitButton">Create your pieku!</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+									<button type="submit" class="btn btn-primary" id="submitButton">CREATE YOUR PIEKU!</button>
 								</div>
 							</form>
 						</div>
@@ -92,7 +92,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
 				<div id="haikuImg"></div>
-				<h4>Haiku</h4>
+				<h4>HAIKU</h4>
 				<p>A Japanese poem of seventeen syllables, in three lines of five, seven, and five.</p>
 			</div>
 			<div class="col-md-1">
@@ -119,13 +119,12 @@
 	<!-- Pieku list layout -->
 	<div class="col-md-12 space"></div>
 	<div class="pieku-list-layout">
-		<h3 class="col-md-12 text-center">List of piekus</h3>
 		<div class="container-fluid">
 			<!-- space -->
 			<div class="col-md-1"></div>
 			<!-- left-aligned navbar -->
 			<div class="col-md-3 pieku-list-nav">
-				<nav class="navbar navbar-default leftbar" id="leftNavbar" role="navigation">
+				<nav class="navbar leftbar" role="navigation">
 					<!-- Brand and toggle get grouped for better mobile display -->
 				  <div class="navbar-header leftbar">
 				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -134,7 +133,9 @@
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				    </button>
-				    <a class="navbar-brand" href="#">Pieku</a>
+				    <a class="navbar-brand" href="#">
+        				<img alt="Brand" src="img/pieku-icon-sm.png" id="leftnavbar-icon" class="text-left">
+      				</a>
 				  </div>
 				  <!-- Collect the nav links, forms, and other content for toggling -->
 				  <div class="collapse navbar-collapse navbar-ex1-collapse leftbar">
@@ -171,7 +172,7 @@
 
 	<!-- underscore template -->
 	<script type="text/template" id="post-template">
-		<div class="panel panel-default col-md-12 text-center">
+		<div class="col-md-12 text-center">
 			<div class="panel-heading">
 				<p>
 					<h1><%= title %></h1>
@@ -182,14 +183,7 @@
 			</div>
 			<table class="table table-condensed">
 				<div class= "panel-body">	
-					<tr>
-						<th>
-							<img class="piekuListImg"></img>
-						<th>
-						<th>
-							<span><%= post %></span>
-						</th>
-					</tr>
+					<span><%= post %></span>
 				</div>
 			</table>
 		</div>

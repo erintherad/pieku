@@ -6,12 +6,14 @@ body {
 }
 
 body {
+	text-transform: uppercase;
 	position: relative;
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
 }
 
 .text-vertical-center {
+	text-transform: uppercase;
 	color: white;
     display: table-cell;
     text-align: center;
@@ -20,6 +22,7 @@ body {
 }
 
 .text-vertical-center h1 {
+	text-transform: uppercase;
     margin: 0;
     padding: 0;
     font-size: 4.5em;
@@ -173,9 +176,6 @@ p.symbol {
 }
 
 /*pieku list layout section*/
-.space {
-	margin-top: 50px;
-}
 .piekuListImg {
 	background: url(img/pieku-icon.png) no-repeat;
 	border: 0;
@@ -183,6 +183,8 @@ p.symbol {
  	width: 125px;
   	height: 125px;
   	border-top-color: none;
+  	border-radius: 0;
+    box-shadow: 0;
 }
 
 table {
