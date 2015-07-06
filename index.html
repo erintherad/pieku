@@ -43,7 +43,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#about">ABOUT </a></li>
-					<li><a href="#piekus">PIEKU</a></li>
+					<li><a id="piekuNav" href="#piekus">PIEKU</a></li>
 					<li><a href="">CONTACT</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -116,11 +116,10 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
-	<hr id="piekus">
 
 	<!-- Pieku list layout -->
-	<div class="col-md-12 space"></div>
-	<div class="pieku-list-layout">
+	<div class="col-md-12"></div>
+	<div id="piekus" class="pieku-list-layout space">
 		<div class="container-fluid">
 			<!-- space -->
 			<div class="col-md-1"></div>
@@ -142,10 +141,15 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse navbar-ex1-collapse leftbar">
 						<ul class="nav navbar-nav leftbar">
-							<li><a href="">About</a></li>
+							<li><a href="#about">About</a></li>
 							<li class="active"><a href="">Piekus</a></li>
 							<li><a href="">Contact</a></li>
 						</ul>
+							<form class="navbar-form navbar-left" role="search">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Search">
+								</div>
+							</form>
 					</div><!-- /.navbar-collapse -->
 				</nav>
 			</div>
@@ -154,7 +158,7 @@
 			<!-- Where new pieku posts are added -->
 			<div class="col-md-4" id="pieku-list-panel"></div> 
 			<!-- Addition features of each post -->
-			<div class="col-md-2"></div>
+			<div class="col-md-2" id="features-list-panel"></div>
 			<!-- space -->
 			<div class="col-md-1"></div>
 		</div>
@@ -173,10 +177,24 @@
 	<script src="script.js"></script>
 
 	<!-- underscore template -->
+	<script type="text/template" id="features-template">
+		<!-- Blog Comments -->
+
+		<!-- Comments Form -->
+		<div class="well comment-feature">
+			<h4>Leave a Comment:</h4>
+			<form role="form">
+				<div class="form-group">
+			   		<textarea class="form-control" rows="3"></textarea>
+				</div>
+				<button type="submit" class="btn btn-dark">Submit</button>
+			</form>
+		</div>	
+	</script>
 	<script type="text/template" id="post-template">
 		<div class="col-md-12 text-center post">
 			<div class="panel-heading">
-				<button type="button" class="close delete" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close delete" class="closeBtn" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<p>
 					<h1><%= title %></h1>
 				</p>
@@ -188,7 +206,7 @@
 			<div class= "panel-body">	
 				<p>
 					<span><%= post %></span>
-				</p>						
+				</p>					
 			</div>
 		</div>
 	</script>

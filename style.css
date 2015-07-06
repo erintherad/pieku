@@ -6,6 +6,9 @@ body {
 }
 
 body {
+	background: url(img/header.jpg) no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 	text-transform: uppercase;
 	position: relative;
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -30,6 +33,10 @@ body {
 }
 
 /* Custom Button Styles */
+
+#topNavbar {
+	opacity: 0.8;
+}
 
 .btn-dark {
     border-radius: 0;
@@ -97,6 +104,7 @@ hr.small {
 
 /*Decription section*/
 .description-row {
+	background-color: white;	
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
@@ -176,6 +184,23 @@ p.symbol {
 }
 
 /*pieku list layout section*/
+.space {
+	margin-top: 130px;
+}
+.post {
+	height: 245px;
+	background-color: rgba(255, 255, 255, 0.7);
+	margin-bottom: 20px;
+}
+.comment-feature {
+	height: 245px;
+	background-color: rgba(255, 255, 255, 0.7);
+	background-image: none;	
+}
+.panel-heading {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 .piekuListImg {
 	background: url(img/pieku-icon.png) no-repeat;
 	border: 0;

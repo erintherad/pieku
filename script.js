@@ -18,6 +18,10 @@ $(function() {
 	// post template
 	var postTemplate = _.template($('#post-template').html());
 
+	// add feature template
+	var featuresTemplate = _.template($('#features-template').html());
+	var $featuresList = $('#features-list-panel');
+
 	var dateString = (new Date()).toLocaleDateString("en-US");
 	// sample posts
 	var posts = [
@@ -32,6 +36,10 @@ $(function() {
 		var $post = $(postTemplate(post));
 		$post.attr('data-index', index);
 		$pieList.append($post);
+
+		// add features
+		var $features = $(featuresTemplate());
+		$featuresList.prepend($features);
 	});
 
 	// submit form to create new todo
@@ -54,6 +62,9 @@ $(function() {
 		$post.attr('data-index', index);
 		$pieList.prepend($post);
 
+		var $features = $(featuresTemplate());
+		$featuresList.prepend($features);
+
 		$('#myModal').on('hidden.bs.modal', function (e) {
 			// scrolls to new post of piekus
 			var yPost = $post.offset().top;
@@ -71,11 +82,19 @@ $(function() {
 		$('#post-title').focus();
 	});
 
+	// navigates to pieku list after click.
+	$("#piekuNav").click(function() {
+		event.preventDefault();
+
+		var yPost = $('#piekus').offset().top-180;
+		window.scroll(0, yPost);
+	});
+
 	// scroll event to fade out top navbar and fade in left navbar
 	$(window).scroll(function(event) {
 		var yScroll = $(window).scrollTop();
 		var yPiekus = $("#piekus").offset();
-		if(yScroll > yPiekus.top){
+		if(yScroll > yPiekus.top-180){
 			$topNavbar.fadeOut();
 			$leftNavbar.fadeIn();
 		} else {
