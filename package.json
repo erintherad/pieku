@@ -1,0 +1,25 @@
+{
+  "name": "pieku",
+  "version": "1.0.0",
+  "description": "A hieku app about pie.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erintherad/pieku.git"
+  },
+  "author": "Erin Mahoney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erintherad/pieku/issues"
+  },
+  "homepage": "https://github.com/erintherad/pieku",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "underscore": "^1.8.3"
+  }
+}
