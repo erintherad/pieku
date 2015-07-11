@@ -11,10 +11,6 @@
 	<!-- Custom style sheet -->
 	<link rel="stylesheet" href="style.css" />
 
-	<!-- Custom Fonts -->
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +21,7 @@
 </head>
 
 <body>
-	<!-- navbar -->
+	<!-- top navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" id="topNavbar">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -49,6 +45,7 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	<!-- top navbar end -->
 
 	<!-- Header -->
 	<header id="top" class="header">
@@ -59,8 +56,9 @@
 			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">CREATE A PIEKU!</a>
 		</div>
 	</header>
+	<!-- header end -->
 
-	<!-- modal window -->
+	<!-- modal window in header -->
 	<div id="myModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -87,6 +85,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- modal window in header end -->
 
 	<!-- Description section -->
 	<div class="description-row text-center" id="about">
@@ -116,6 +115,7 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+	<!-- Description section end -->
 
 	<!-- Pieku list layout -->
 	<div class="col-md-12"></div>
@@ -124,7 +124,7 @@
 			<!-- space -->
 			<div class="col-md-1"></div>
 			<!-- left-aligned navbar -->
-			<div class="col-md-3 pieku-list-nav">
+			<div class="col-md-3 pieku-list-nav" id="leftNavbar">
 				<nav class="navbar navbar-default leftbar" role="navigation">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header leftbar">
@@ -153,16 +153,22 @@
 					</div><!-- /.navbar-collapse -->
 				</nav>
 			</div>
+			<!-- Left aligned navbar end -->
+
 			<!-- space -->
 			<div class="col-md-1"></div>
+
 			<!-- Where new pieku posts are added -->
 			<div class="col-md-4" id="pieku-list-panel"></div> 
+
 			<!-- Addition features of each post -->
 			<div class="col-md-2" id="features-list-panel"></div>
+
 			<!-- space -->
 			<div class="col-md-1"></div>
 		</div>
 	</div>
+	<!-- Pieku list layout end -->
 
 	<!--jQuery-->
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -194,7 +200,7 @@
 	<script type="text/template" id="post-template">
 		<div class="col-md-12 text-center post">
 			<div class="panel-heading">
-				<button type="button" class="close delete" class="closeBtn" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close delete delete-pieku" class="closeBtn" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<p>
 					<h1><%= title %></h1>
 				</p>
