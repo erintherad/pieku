@@ -2,17 +2,17 @@
 
 $(function() {	
 
-	// about button scrollspy
-	var$aboutBtn = $('#about-btn');
-
-	// Top navbar element
-	var $topNavbar = $('#topNavbar');
-
-	// Left navbar element
-	var $leftNavbar = $('#leftNavbar');
-
 	// piekuController holds all of the pieku functionality
 	var piekuController = {
+
+		// about button scrollspy
+		var$aboutBtn = $('#about-btn');
+
+		// Top navbar element
+		var $topNavbar = $('#topNavbar');
+
+		// Left navbar element
+		var $leftNavbar = $('#leftNavbar');
 
 		// compile pieku template
 		template: _.template($('#post-template').html());
@@ -43,8 +43,8 @@ $(function() {
 				// var $features = $(featuresTemplate());
 				// $featuresList.prepend($features);
 
+				// scrolls to new post of piekus
 				$('#myModal').on('hidden.bs.modal', function (e) {
-					// scrolls to new post of piekus
 					var yPost = $post.offset().top;
 					window.scroll(0, yPost);
 				});
@@ -161,6 +161,8 @@ $(function() {
 		}
 	});
 });
+
+// OLD js...
 
 	// // form to create new pieku post
 	// var $newPost = $('#new-post');
