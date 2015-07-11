@@ -2,23 +2,23 @@
 
 $(function() {	
 
+	// about button scrollspy
+	var$aboutBtn = $('#about-btn');
+
+	// Top navbar element
+	var $topNavbar = $('#topNavbar');
+
+	// Left navbar element
+	var $leftNavbar = $('#leftNavbar');
+
 	// piekuController holds all of the pieku functionality
 	var piekuController = {
 
-		// about button scrollspy
-		var$aboutBtn = $('#about-btn');
-
-		// Top navbar element
-		var $topNavbar = $('#topNavbar');
-
-		// Left navbar element
-		var $leftNavbar = $('#leftNavbar');
-
 		// compile pieku template
-		template: _.template($('#post-template').html());
+		template: _.template($('#post-template').html()),
 
 		all: function() {
-			$.get('/api/phrases', function(data) {
+			$.get('/api/piekus/', function(data) {
 				var allPiekus = data;
 
 				// iterate through allPiekus
@@ -32,8 +32,8 @@ $(function() {
 			});
 		},
 
-		create: function(newTitle, newAuthor, newPost, newDate) {
-			var piekuData = {title: newTitle, author: newAuthor, post: newPost, date: newDate};
+		create: function(newTitle, newAuthor, newPost) {
+			var piekuData = {title: newTitle, author: newAuthor, post: newPost};
 			// send POST request to server to create new pieku
 			$.post('/piekus', piekuData, function(data) {
 				// pass pieku object through template and append to view
@@ -57,7 +57,7 @@ $(function() {
 			});
 		},
 
-		update: function(piekuId, updateTitle, updateAuthor, updatePost, updateDate) {
+		update: function(piekuId, updateTitle, updateAuthor, updatePost) {
 			// send PUT request to server to update pieku
 			$.ajax({
 				type: 'PUT',
@@ -65,8 +65,7 @@ $(function() {
 				data: {
 					title: updateTitle,
 					author: updateAuthor,
-					post: updatePost,
-					date: updateDate
+					post: updatePost
 				},
 				success: function(data) {
 					// pass phrase object through template and append to view
@@ -102,8 +101,7 @@ $(function() {
 				var updateTitle = $(this).find('.update-title').val();
 				var updateAuthor = $(this).find('.update-author').val();
 				var updatePost = $(this).find('.update-post').val();
-				var updateDate = $(this).find('.update-date').val();
-				piekuController.update(piekuId, updateTitle, updateAuthor, updatePost, updateDate);
+				piekuController.update(piekuId, updateTitle, updateAuthor, updatePost);
 			})
 			// for delete: click event on '.delete-pieku' button
 			.on('click', '.delete-pieku', function(event) {
@@ -123,43 +121,42 @@ $(function() {
 				var newTitle = $('#new-title').val();
 				var newAuthor = $('#new-author').val();
 				var newPost = $('#new-Post').val();
-				var newDate = $('#new-Date').val();
-				piekuController.create(newTitle, newAuthor, newPost, newDate);
+				piekuController.create(newTitle, newAuthor, newPost);
 
 				// reset form
 				$(this)[0].reset();
 				$('#new-pieku').focus();
 
 			});
-		};
+		}
 	};
 
 	piekuController.setupView();
 
-	$('#myModal').on('shown.bs.modal', function (e) {
-		$('#post-title').focus();
-	});
+	// $('#myModal').on('shown.bs.modal', function (e) {
+	// 	$('#post-title').focus();
+	// });
 
-	// navigates to pieku list after click.
-	$("#piekuNav").click(function() {
-		event.preventDefault();
+	// // navigates to pieku list after click.
+	// $("#piekuNav").click(function() {
+	// 	event.preventDefault();
 
-		var yPost = $('#piekus').offset().top-180;
-		window.scroll(0, yPost);
-	});
+	// 	var yPost = $('#piekus').offset().top-180;
+	// 	window.scroll(0, yPost);
+	// });
 
-	// scroll event to fade out top navbar and fade in left navbar
-	$(window).scroll(function(event) {
-		var yScroll = $(window).scrollTop();
-		var yPiekus = $("#piekus").offset();
-		if(yScroll >= yPiekus.top-180){
-			$topNavbar.fadeOut();
-			$leftNavbar.fadeIn();
-		} else {
-			$topNavbar.fadeIn();
-			$leftNavbar.fadeOut();
-		}
-	});
+	// // scroll event to fade out top navbar and fade in left navbar
+	// $(window).scroll(function(event) {
+	// 	var yScroll = $(window).scrollTop();
+	// 	var yPiekus = $("#piekus").offset();
+	// 	if(yScroll >= yPiekus.top-180){
+	// 		$topNavbar.fadeOut();
+	// 		$leftNavbar.fadeIn();
+	// 	} else {
+	// 		$topNavbar.fadeIn();
+	// 		$leftNavbar.fadeOut();
+	// 	}
+	// });
 });
 
 // OLD js...

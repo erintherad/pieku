@@ -2,9 +2,9 @@
 
 // require express and other modules
 var express = require('express'),
-	app = express(),
-	bodyParser = require('body-parser'),
-	_ = require('underscore');
+app = express(),
+bodyParser = require('body-parser'),
+_ = require('underscore');
 
 // server js and css files from public folder
 app.use(express.static(__dirname + '/public'));
@@ -14,9 +14,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // pre-seeded phrase data
 var piekus = [
-	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", post: "When I look at it," + "<br>" + "The circle becomes a slice," + "<br>" + "I eat the whole pie.", time: dateString },
-	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", post: "Oh pie in the sky," + "<br>" + "You look too bright to eat now," + "<br>" + "The full moon is wow", time: dateString },
-	{ id: 3, title:"Pie for no one" , author: "Annie Ross", post: "Alone I stand here," + "<br>" + "Hunger sounds from my stomach," + "<br>" + "No pie to be found.", time: dateString }
+	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", post: "When I look at it," + "<br>" + "The circle becomes a slice," + "<br>" + "I eat the whole pie." },
+	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", post: "Oh pie in the sky," + "<br>" + "You look too bright to eat now," + "<br>" + "The full moon is wow" },
+	{ id: 3, title:"Pie for no one" , author: "Annie Ross", post: "Alone I stand here," + "<br>" + "Hunger sounds from my stomach," + "<br>" + "No pie to be found." }
 ];	
 
 // ROUTES
@@ -76,7 +76,7 @@ app.delete('/api/piekus/:id', function(req, res) {
 	res.json(targetPieku);
 });
 
-app.list(3000, function() {
+app.listen(3000, function() {
 	console.log('Server started on localhost:3000');
 });
 
