@@ -16,9 +16,9 @@ var dateString = (new Date()).toLocaleDateString("en-US");
 
 // pre-seeded phrase data
 var piekus = [
-	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", post: "When I look at it," + "<br>" + "The circle becomes a slice," + "<br>" + "I eat the whole pie.", date: dateString },
-	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", post: "Oh pie in the sky," + "<br>" + "You look too bright to eat now," + "<br>" + "The full moon is wow", date: dateString },
-	{ id: 3, title:"Pie for no one" , author: "Annie Ross", post: "Alone I stand here," + "<br>" + "Hunger sounds from my stomach," + "<br>" + "No pie to be found.", date: dateString }
+	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", line1: "When I look at it,", line2: "The circle becomes a slice,", line3: "I eat the whole pie.", date: dateString },
+	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", line1: "Oh pie in the sky,", line2: "You look too bright to eat now,", line3: "The full moon is wow", date: dateString },
+	{ id: 3, title:"Pie for no one" , author: "Annie Ross", line1: "Alone I stand here,", line2: "Hunger sounds from my stomach,", line3: "No pie to be found.", date: dateString }
 ];	
 
 // ROUTES
@@ -62,7 +62,9 @@ app.put('/api/piekus/:id', function(req, res) {
 	// update various parts of pieku post
 	targetPieku.title = req.body.title;
 	targetPieku.author = req.body.author;
-	targetPieku.post = req.body.post;
+	targetPieku.line1 = req.body.line1;
+	targetPieku.line2 = req.body.line2;
+	targetPieku.line3 = req.body.line3;
 	// send target back to edited object
 	res.json(targetPieku);
 });

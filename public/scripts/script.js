@@ -38,10 +38,11 @@ $(function() {
 			return _.findWhere(allPiekus, {id: id});
 		},
 
-		create: function(newTitle, newAuthor, newPost) {
-			var piekuData = {title: newTitle, author: newAuthor, post: newPost};
+		create: function(newTitle, newAuthor, newLine1, newLine2, newLine3) {
+			var piekuData = {title: newTitle, author: newAuthor, line1: newLine1, line2: newLine2, line3: newLine3};
 			// send POST request to server to create new pieku
 			$.post('/api/piekus', piekuData, function(data) {
+				allPiekus.push(data);
 				// pass pieku object through template and append to view
 				var $piekuHtml = $(piekuController.template(data));
 				$('#pieku-list-panel').prepend($piekuHtml);
@@ -63,7 +64,7 @@ $(function() {
 			});
 		},
 
-		update: function(piekuId, updateTitle, updateAuthor, updatePost) {
+		update: function(piekuId, updateTitle, updateAuthor, updateLine1, updateLine2, updateLine3) {
 			// send PUT request to server to update pieku
 			$.ajax({
 				type: 'PUT',
@@ -71,7 +72,9 @@ $(function() {
 				data: {
 					title: updateTitle,
 					author: updateAuthor,
-					post: updatePost
+					line1: updateLine1,
+					line2: updateLine2,
+					line3: updateLine3
 				},
 				success: function(data) {
 					// pass phrase object through template and append to view
@@ -107,8 +110,10 @@ $(function() {
 				var piekuId = $(this).closest('.update-pieku').data('id');
 				var updateTitle = $(this).find('.update-title').val();
 				var updateAuthor = $(this).find('.update-author').val();
-				var updatePost = $(this).find('.update-post').val();
-				piekuController.update(piekuId, updateTitle, updateAuthor, updatePost);
+				var updateLine1 = $(this).find('.update-line1').val();
+				var updateLine2 = $(this).find('.update-line2').val();
+				var updateLine3 = $(this).find('.update-line3').val();
+				piekuController.update(piekuId, updateTitle, updateAuthor, updateLine1, updateLine2, updateLine3);
 
 				// reset form
 				$(this)[0].reset();
@@ -131,9 +136,10 @@ $(function() {
 				event.preventDefault();
 				var newTitle = $('#new-title').val();
 				var newAuthor = $('#new-author').val();
-				var newPost = $('#new-post').val();
-				piekuController.create(newTitle, newAuthor, newPost);
-
+				var newLine1 = $('#new-line1').val();
+				var newLine2 = $('#new-line2').val();
+				var newLine3 = $('#new-line3').val();
+				piekuController.create(newTitle, newAuthor, newLine1, newLine2, newLine3);
 				// reset form
 				$(this)[0].reset();
 				$('#new-pieku').focus();
@@ -164,7 +170,9 @@ $(function() {
 		// giving values of pieku prior to update.
 		modal.find('.update-title').val(pieku.title);
 		modal.find('.update-author').val(pieku.author);
-		modal.find('.update-post').val(pieku.post);
+		modal.find('.update-line1').val(pieku.line1);
+		modal.find('.update-line2').val(pieku.line2);
+		modal.find('.update-line3').val(pieku.line3);
 	});
 
 	// // navigates to pieku list after click.

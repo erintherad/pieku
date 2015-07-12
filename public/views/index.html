@@ -68,13 +68,15 @@
 				<form class="text-center myForm" id="new-pieku">
 					<div class="modal-body">
 						<div class="form-group">
-							<input class="form-control" id="new-title" placeholder="Title">
+							<input class="form-control" id="new-title" placeholder="Title" required autofocus>
 						</div>
 						<div class="form-group">
 							<input class="form-control" id="new-author" placeholder="Author">
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" id="new-post" rows="3" placeholder="Create your pieku here." required autofocus></textarea>
+							<input class="form-control" id="new-line1" placeholder="Create line 1 here"></input>
+							<input class="form-control" id="new-line2" placeholder="Create line 2 here"></input>
+							<input class="form-control" id="new-line3" placeholder="Create line 3 here"></input>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -170,13 +172,19 @@
 						<form class="text-center myForm" id="update-pieku">
 							<div class="modal-body">
 								<div class="form-group">
-									<input class="form-control update-title" placeholder="Edit title?">
+									<input class="form-control update-title" placeholder="Edit title?" required autofocus>
 								</div>
 								<div class="form-group">
 									<input class="form-control update-author" placeholder="Edit author?">
 								</div>
 								<div class="form-group">
-									<textarea class="form-control update-post" rows="3" placeholder="Update post?" required autofocus></textarea>
+									<input class="form-control update-line1" placeholder="Update line 1?"></input>
+								</div>
+								<div class="form-group">
+									<input class="form-control update-line2" placeholder="Update line 2?"></input>
+								</div>
+								<div class="form-group">
+									<input class="form-control update-line3" placeholder="Update line 3?"></input>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -247,7 +255,13 @@
 				</div>
 				<div class= "panel-body">	
 					<p>
-						<span><%= post %></span>
+						<span><%= line1 %></span>
+					</p>
+					<p>
+						<span><%= line2 %></span>
+					</p>
+					<p>
+						<span><%= line3 %></span>
 					</p>
 					<!-- edit post (pencil icon) to toggle form -->
 					<a class="edit-pencil" data-target="#updateModal" data-toggle="modal" role="button" data-pieku-id="<%= id %>">
