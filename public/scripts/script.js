@@ -16,10 +16,12 @@ $(function() {
 
 		// compile pieku template
 		template: _.template($('#post-template').html()),
+		// temp storing data for other functions
+		allPiekus: [],
 
 		all: function() {
 			$.get('/api/piekus/', function(data) {
-				var allPiekus = data;
+				allPiekus = data;
 
 				// iterate through allPiekus
 				_.each(allPiekus, function(pieku){
@@ -30,6 +32,10 @@ $(function() {
 				// add event-handlers to piekus for updating/deleting
 				piekuController.addEventHandlers();
 			});
+		},
+
+		getPieku: function(id) {
+			return _.findWhere(allPiekus, {id: id});
 		},
 
 		create: function(newTitle, newAuthor, newPost) {
@@ -44,13 +50,13 @@ $(function() {
 				// $featuresList.prepend($features);
 
 				// scrolls to new post of piekus
-				$('#myModal').on('hidden.bs.modal', function (e) {
+				$('#createModal').on('hidden.bs.modal', function (e) {
 					var yPost = $piekuHtml.offset().top;
 					window.scroll(0, yPost);
 				});
 
 				// hides modal and give alert upon submit
-				$('#myModal').modal('hide');
+				$('#createModal').modal('hide');
 
 				// reset the form
 				$('#new-pieku')[0].reset();
@@ -95,7 +101,7 @@ $(function() {
 		addEventHandlers: function() {
 			$('#pieku-list-panel')
 			// for update: submit event on ".update-pieku form"
-			.on('submit', '.update-pieku', function(event){
+			$('#update-pieku').on('submit', function(event){
 				event.preventDefault();
 				// var piekuId = $(this).closest('.pieku').attr('data-id');
 				var piekuId = $(this).closest('.update-pieku').data('id');
@@ -103,6 +109,10 @@ $(function() {
 				var updateAuthor = $(this).find('.update-author').val();
 				var updatePost = $(this).find('.update-post').val();
 				piekuController.update(piekuId, updateTitle, updateAuthor, updatePost);
+
+				// reset form
+				$(this)[0].reset();
+				$('#update-pieku').focus();
 			})
 			// for delete: click event on '.delete-pieku' button
 			.on('click', '.delete-pieku', function(event) {
@@ -134,8 +144,27 @@ $(function() {
 
 	piekuController.setupView();
 
-	$('#myModal').on('shown.bs.modal', function (e) {
+	$('#createModal').on('shown.bs.modal', function (e) {
 		$('#post-title').focus();
+	});
+
+	$('#updateModal').on('shown.bs.modal', function(e) {
+		$('#update-title').focus();
+	});
+
+	$('#updateModal').on('show.bs.modal', function (event) {
+		// update button in html
+		var button = $(event.relatedTarget);
+		// retrieving id of made pieku
+		var id = button.data('pieku-id');
+		// Gets the pieku data
+		var pieku = piekuController.getPieku(id);
+		// reference to modal
+		var modal = $(this);
+		// giving values of pieku prior to update.
+		modal.find('.update-title').val(pieku.title);
+		modal.find('.update-author').val(pieku.author);
+		modal.find('.update-post').val(pieku.post);
 	});
 
 	// // navigates to pieku list after click.

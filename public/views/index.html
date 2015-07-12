@@ -53,13 +53,13 @@
 			<h1 style="margin-top: 60px">PIEKU</h1>
 			<h3>FOR THE LOVE OF POETRY AND PIE.</h3>
 			<br>
-			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#myModal">CREATE A PIEKU!</a>
+			<a class="btn btn-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#createModal">CREATE A PIEKU!</a>
 		</div>
 	</header>
 	<!-- header end -->
 
 	<!-- modal window in header -->
-	<div id="myModal" class="modal fade">
+	<div id="createModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -159,7 +159,36 @@
 			<div class="col-md-1"></div>
 
 			<!-- Where new pieku posts are added -->
-			<div class="col-md-4" id="pieku-list-panel"></div> 
+			<div class="col-md-4" id="pieku-list-panel">
+			<!-- update modal window underscore template in list -->
+			<div id="updateModal" class="modal fade update-pieku">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">UPDATE YOUR PIEKU!</h4>	
+						</div>
+						<form class="text-center myForm" id="update-pieku">
+							<div class="modal-body">
+								<div class="form-group">
+									<input class="form-control update-title" placeholder="Edit title?">
+								</div>
+								<div class="form-group">
+									<input class="form-control update-author" placeholder="Edit author?">
+								</div>
+								<div class="form-group">
+									<textarea class="form-control update-post" rows="3" placeholder="Update post?" required autofocus></textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+								<button type="submit" class="btn btn-primary" id="update-pieku">UPDATE YOUR PIEKU!</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- update modal window underscore template in list end -->
+			</div> 
 
 			<!-- Addition features of each post -->
 			<div class="col-md-2" id="features-list-panel"></div>
@@ -221,27 +250,11 @@
 						<span><%= post %></span>
 					</p>
 					<!-- edit post (pencil icon) to toggle form -->
-					<a class="edit-pencil" data-toggle="collapse" data-target="#update-<%= id %>">
+					<a class="edit-pencil" data-target="#updateModal" data-toggle="modal" role="button" data-pieku-id="<%= id %>">
 						<span class="glyphicon glyphicon-pencil edit"></span>
 					</a>					
 				</div>
 			</div>
-
-		<!-- underscore update pieku form -->
-		<div class="collapse" id="update-<%= id %>">
-		<br>
-			<form class="form-inline update-pieku" data-id="<%= id %>">
-				<input type="text" class="form-control update-title" value="<%= title %>" placeholder="Update title?">
-
-				<input type="text" class="form-control update-author" value="<%= author %>" placeholder="Change author?">
-
-
-
-				<input type="text" class="form-control update-post" value="<%= post %>" placeholder="Edit post?">
-
-				<input type="submit" class="btn btn-default" value="Update pieku">
-			</form>
-		</div>
 	 </script>
 	</body>
 </html>
