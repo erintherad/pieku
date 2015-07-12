@@ -102,12 +102,12 @@ $(function() {
 
 		// add event-handlers to piekus for updating/deleting
 		addEventHandlers: function() {
-			$('#pieku-list-panel')
 			// for update: submit event on ".update-pieku form"
 			$('#update-pieku').on('submit', function(event){
 				event.preventDefault();
 				// var piekuId = $(this).closest('.pieku').attr('data-id');
-				var piekuId = $(this).closest('.update-pieku').data('id');
+				// var piekuId = $(this).closest('.update-pieku').data('id');
+				var piekuId = $(this).find('.update-id').val();
 				var updateTitle = $(this).find('.update-title').val();
 				var updateAuthor = $(this).find('.update-author').val();
 				var updateLine1 = $(this).find('.update-line1').val();
@@ -118,9 +118,14 @@ $(function() {
 				// reset form
 				$(this)[0].reset();
 				$('#update-pieku').focus();
+
+				// hides modal and give alert upon submit
+				$('#updateModal').modal('hide');
+
 			})
+
 			// for delete: click event on '.delete-pieku' button
-			.on('click', '.delete-pieku', function(event) {
+			$('#pieku-list-panel').on('click', '.delete-pieku', function(event) {
 				event.preventDefault();
 				var piekuId = $(this).closest('.pieku').attr('data-id');
 				piekuController.delete(piekuId);
@@ -168,6 +173,7 @@ $(function() {
 		// reference to modal
 		var modal = $(this);
 		// giving values of pieku prior to update.
+		modal.find('.update-id').val(id);
 		modal.find('.update-title').val(pieku.title);
 		modal.find('.update-author').val(pieku.author);
 		modal.find('.update-line1').val(pieku.line1);
@@ -175,13 +181,13 @@ $(function() {
 		modal.find('.update-line3').val(pieku.line3);
 	});
 
-	// // navigates to pieku list after click.
-	// $("#piekuNav").click(function() {
-	// 	event.preventDefault();
+	// navigates to pieku list after click.
+	$("#piekuNav").click(function() {
+		event.preventDefault();
 
-	// 	var yPost = $('#piekus').offset().top-180;
-	// 	window.scroll(0, yPost);
-	// });
+		var yPost = $('#piekus').offset().top-130;
+		window.scroll(0, yPost);
+	});
 
 	// scroll event to fade out top navbar and fade in left navbar
 	$(window).scroll(function(event) {

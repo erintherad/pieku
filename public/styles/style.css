@@ -114,8 +114,10 @@ hr.small {
 	display: block;	
 	width: 125px;
  	height: 125px;
- 	margin-left: 61px;
- 	margin-bottom: 30px;
+ 	margin: auto;
+ 	background-position: center;
+/* 	margin-left: 61px;
+ 	margin-bottom: 30px;*/
 }
 
 #pieImg {
@@ -123,9 +125,11 @@ hr.small {
 	display: block;		
 	width: 125px;
   	height: 125px;	
-  	margin-left: 54px;
+  	margin: auto;
+  	background-position: center;
+/*  	margin-left: 54px;
   	margin-bottom: -10px;
-  	margin-top: 30px;
+  	margin-top: 30px;*/
 }
 
 #piekuImg {
@@ -133,9 +137,11 @@ hr.small {
 	display: block;	
  	width: 125px;
   	height: 125px;
-  	margin-left: 64px;
+ 	margin: auto; 
+ 	background-position: center; 	
+/*  	margin-left: 64px;
   	margin-bottom: -10px;
-  	margin-top: 30px;
+  	margin-top: 30px;*/
 }
 
 p.symbol {
