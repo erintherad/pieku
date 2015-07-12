@@ -65,16 +65,16 @@
 				<div class="modal-header">
 					<h4 class="modal-title">CREATE A PIEKU!</h4>	
 				</div>
-				<form class="text-center myForm" id="new-post">
+				<form class="text-center myForm" id="new-pieku">
 					<div class="modal-body">
 						<div class="form-group">
-							<input class="form-control" id="post-title" placeholder="Title">
+							<input class="form-control" id="new-title" placeholder="Title">
 						</div>
 						<div class="form-group">
-							<input class="form-control" id="post-author" placeholder="Author">
+							<input class="form-control" id="new-author" placeholder="Author">
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" id="post-desc" rows="3" placeholder="Create your pieku here." required autofocus></textarea>
+							<textarea class="form-control" id="new-post" rows="3" placeholder="Create your pieku here." required autofocus></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -183,7 +183,7 @@
 	<script src="/scripts/script.js"></script>
 
 	<!-- underscore features/commments template -->
-	// <script type="text/template" id="features-template">
+	 <script type="text/template" id="features-template">
 		// <!-- Comments Form -->
 		<div class="well comment-feature">
 			<h4>Leave a Comment:</h4>
@@ -194,49 +194,54 @@
 				</div>
 			</form>
 		</div>	
-	// </script>
+	 </script>
 
 		<!-- underscore new pieku form -->
-	 // <script type="text/template" id="post-template">
-			<div class="col-md-12 text-center post">
+	  <script type="text/template" id="post-template">
+			<div class="col-md-12 text-center pieku" id="pieku-<%= id %>" data-id="<%= id %>">
 				<div class="panel-heading">
-					// delete post button
-					<button type="button" class="close delete delete-pieku" class="closeBtn" aria-label="Close"><span aria-hidden="true"></button>
-					// <!-- edit post (pencil icon) to toggle form -->
-					<a class="edit-pencil" data-toggle="collapse" data-target="#update-<%= id %>">
-						<span class="glyphicon glyphicon-pencil edit"></span>
+					<!-- delete post button -->
+					<a class="close delete delete-pieku closeBtn" aria-label="Close"><span aria-hidden="true">
+						<span class="glyphicon glyphicon-remove-circle"></span>
 					</a>
-					// Create a pieku form
+					<!-- Create a pieku form -->
 					<p>
 						<h1><%= title %></h1>
 					</p>
 					<p>	
 						<span><%= author %></span>
 					</p>
-					// <p class="glyphicon glyphicon-"><%= time %></p> 
+					<p>
+						<span><%= date %></span>
+					</p>
+
 				</div>
 				<div class= "panel-body">	
 					<p>
 						<span><%= post %></span>
-					</p>					
+					</p>
+					<!-- edit post (pencil icon) to toggle form -->
+					<a class="edit-pencil" data-toggle="collapse" data-target="#update-<%= id %>">
+						<span class="glyphicon glyphicon-pencil edit"></span>
+					</a>					
 				</div>
 			</div>
 
-		// underscore update pieku form
+		<!-- underscore update pieku form -->
 		<div class="collapse" id="update-<%= id %>">
 		<br>
-			<form class="form-inline update-pieku">
-				<input type="text" class="form-control updated-title" value="<%= title %>" placeholder="Update title?">
+			<form class="form-inline update-pieku" data-id="<%= id %>">
+				<input type="text" class="form-control update-title" value="<%= title %>" placeholder="Update title?">
 
-				<input type="text" class="form-control updated-author" value="<%= author %>" placeholder="Change author?">
+				<input type="text" class="form-control update-author" value="<%= author %>" placeholder="Change author?">
 
-					// <p class="glyphicon glyphicon-time"><%= time %></p> 
 
-				<input type="text" class="form-control updated-post" value="<%= post %>" placeholder="Edit post?">
+
+				<input type="text" class="form-control update-post" value="<%= post %>" placeholder="Edit post?">
 
 				<input type="submit" class="btn btn-default" value="Update pieku">
 			</form>
 		</div>
-	// </script>
+	 </script>
 	</body>
 </html>

@@ -35,7 +35,7 @@ $(function() {
 		create: function(newTitle, newAuthor, newPost) {
 			var piekuData = {title: newTitle, author: newAuthor, post: newPost};
 			// send POST request to server to create new pieku
-			$.post('/piekus', piekuData, function(data) {
+			$.post('/api/piekus', piekuData, function(data) {
 				// pass pieku object through template and append to view
 				var $piekuHtml = $(piekuController.template(data));
 				$('#pieku-list-panel').prepend($piekuHtml);
@@ -45,7 +45,7 @@ $(function() {
 
 				// scrolls to new post of piekus
 				$('#myModal').on('hidden.bs.modal', function (e) {
-					var yPost = $post.offset().top;
+					var yPost = $piekuHtml.offset().top;
 					window.scroll(0, yPost);
 				});
 
@@ -53,7 +53,7 @@ $(function() {
 				$('#myModal').modal('hide');
 
 				// reset the form
-				$newPost[0].reset();
+				$('#new-pieku')[0].reset();
 			});
 		},
 
@@ -61,7 +61,7 @@ $(function() {
 			// send PUT request to server to update pieku
 			$.ajax({
 				type: 'PUT',
-				url: '/piekus/' + piekuId,
+				url: '/api/piekus/' + piekuId,
 				data: {
 					title: updateTitle,
 					author: updateAuthor,
@@ -73,7 +73,7 @@ $(function() {
 					$('#pieku-' + piekuId).replaceWith($piekuHtml); 
 				},
 				// response if incorrect data or object not found
-				error: function(jqXHR, testStatus, errorThrown) {
+				error: function(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus);
 				}
 			});
@@ -97,7 +97,8 @@ $(function() {
 			// for update: submit event on ".update-pieku form"
 			.on('submit', '.update-pieku', function(event){
 				event.preventDefault();
-				var piekuId = $(this).closest('.pieku').attr('data-id');
+				// var piekuId = $(this).closest('.pieku').attr('data-id');
+				var piekuId = $(this).closest('.update-pieku').data('id');
 				var updateTitle = $(this).find('.update-title').val();
 				var updateAuthor = $(this).find('.update-author').val();
 				var updatePost = $(this).find('.update-post').val();
@@ -120,7 +121,7 @@ $(function() {
 				event.preventDefault();
 				var newTitle = $('#new-title').val();
 				var newAuthor = $('#new-author').val();
-				var newPost = $('#new-Post').val();
+				var newPost = $('#new-post').val();
 				piekuController.create(newTitle, newAuthor, newPost);
 
 				// reset form
@@ -133,9 +134,9 @@ $(function() {
 
 	piekuController.setupView();
 
-	// $('#myModal').on('shown.bs.modal', function (e) {
-	// 	$('#post-title').focus();
-	// });
+	$('#myModal').on('shown.bs.modal', function (e) {
+		$('#post-title').focus();
+	});
 
 	// // navigates to pieku list after click.
 	// $("#piekuNav").click(function() {
@@ -145,18 +146,18 @@ $(function() {
 	// 	window.scroll(0, yPost);
 	// });
 
-	// // scroll event to fade out top navbar and fade in left navbar
-	// $(window).scroll(function(event) {
-	// 	var yScroll = $(window).scrollTop();
-	// 	var yPiekus = $("#piekus").offset();
-	// 	if(yScroll >= yPiekus.top-180){
-	// 		$topNavbar.fadeOut();
-	// 		$leftNavbar.fadeIn();
-	// 	} else {
-	// 		$topNavbar.fadeIn();
-	// 		$leftNavbar.fadeOut();
-	// 	}
-	// });
+	// scroll event to fade out top navbar and fade in left navbar
+	$(window).scroll(function(event) {
+		var yScroll = $(window).scrollTop();
+		var yPiekus = $("#piekus").offset();
+		if(yScroll >= yPiekus.top-180){
+			$topNavbar.fadeOut();
+			// $leftNavbar.fadeIn();
+		} else {
+			$topNavbar.fadeIn();
+			// $leftNavbar.fadeOut();
+		}
+	});
 });
 
 // OLD js...
