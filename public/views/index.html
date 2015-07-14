@@ -236,7 +236,7 @@
 
 		<!-- underscore new pieku form -->
 	  <script type="text/template" id="post-template">
-			<div class="col-md-12 text-center pieku" id="pieku-<%= id %>" data-id="<%= id %>">
+			<div class="col-md-12 text-center pieku" id="pieku-<%= _id %>" data-id="<%= _id %>">
 				<div class="panel-heading">
 					<!-- delete post button -->
 					<a class="close delete delete-pieku closeBtn" aria-label="Close"><span aria-hidden="true">
@@ -252,7 +252,6 @@
 					<p>
 						<span><%= date %></span>
 					</p>
-
 				</div>
 				<div class= "panel-body">	
 					<p>
@@ -265,7 +264,7 @@
 						<span><%= line3 %></span>
 					</p>
 					<!-- edit post (pencil icon) to toggle form -->
-					<a class="edit-pencil" data-target="#updateModal" data-toggle="modal" role="button" data-pieku-id="<%= id %>">
+					<a class="edit-pencil" data-target="#updateModal" data-toggle="modal" role="button" data-pieku-id="<%= _id %>">
 						<span class="glyphicon glyphicon-pencil edit"></span>
 					</a>					
 				</div>

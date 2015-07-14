@@ -35,7 +35,7 @@ $(function() {
 		},
 
 		getPieku: function(id) {
-			return _.findWhere(allPiekus, {id: id});
+			return _.findWhere(allPiekus, {_id: id});
 		},
 
 		create: function(newTitle, newAuthor, newLine1, newLine2, newLine3) {
