@@ -1,5 +1,6 @@
 // SERVER-SIDE JAVASCRIPT
 
+// REQUIREMENTS
 // require express and other modules
 var express = require('express'),
 app = express(),
@@ -17,7 +18,8 @@ mongoose.connect('mongodb://localhost/pieku');
 
 var db = require('./models/models');
 
-// ROUTES
+
+// PIEKU ROUTES
 // root route (serves index.html)
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/public/views/index.html');
@@ -31,114 +33,6 @@ app.get('/api/piekus', function (req, res) {
 	// });
 	db.Pieku.find({}).populate('author').exec(function (err, piekus) {
 		res.json(piekus);
-	});
-});
-
-// get all authors
-app.get('/api/authors', function (req, res) {
-	// query db to find authors and send authors as json response
-	db.Author.find({}).exec(function (err, author) {
-		res.json(author)
-	});
-});
-
-// defines date for piekus
-var dateString = (new Date()).toLocaleDateString("en-US");
-
-// create new pieku
-app.post('/api/piekus', function (req, res) {
-	// create an author record
-	var newAuthor = new db.Author ({
-		name: req.body.author
-	});
-
-	// save new author record
-	newAuthor.save()
-
-	// create new pieku with form data
-	var newPieku = new db.Pieku ({
-		title: req.body.title,
-		author: newAuthor._id,
-		line1: req.body.line1,
-		line2: req.body.line2,
-		line3: req.body.line3,
-		date: dateString,
-	});
-
-	// save new pieku in db
-	newPieku.save(function(err, savedPieku) {
-		res.json(savedPieku);
-	});
-});
-
-// create a new author
-app.post('/api/authors', function (req, res) {
-		// create an author record
-	var newAuthor = new db.Author ({
-		name: req.body.name
-	});
-
-	// save new author record
-	newAuthor.save(function (err, author) {
-		// send as json response
-		res.json(newAuthor);
-	});
-});
-
-// create a new comment on pieku
-app.post('/api/piekus/:id/comments', function (req, res) {
-	// get the id of pieku
-	var postId = req.params.id;
-	// finds post based off of id
-	db.Pieku.findOne({_id: postId}).exec(function (err, pieku){
-		// create new comment record
-		var newComment = new db.Comment({
-			text: req.body.text 
-		});
-
-		// Push new comment into comments and save
-		pieku.comments.push(newComment._id);
-		pieku.save();
-		// send as JSON response
-		res.json(newComment);	
-	});
-	
-});
-
-// get one pieku
-app.get('/api/piekus/:id', function (req, res) {
-	// set the value of the id
-	var targetId = req.params.id;
-
-	// find phrase in db by id
-	db.Pieku.findOne({_id: targetId}, function (err, foundPieku) {
-		res.json(foundPieku);
-	});
-});
-
-// get comments on one pieku
-app.get('/api/piekus/:id/comments', function (req, res) {
-	// get the id of the pieku
-	var postId = req.params.id;
-
-	// find pieku by id
-	db.Pieku.findOne({_id: postId}).populate('comments').exec(function (err, pieku) {
-		res.json(pieku.comments);
-	});
-});
-
-// specific author to specific post
-app.put('/api/piekus/:id/authors/:authorid', function (req, res) {
-	var authorId = req.params.authorid;
-	db.Author.findOne({_id: authorId});
-	var piekuId = req.params.id;
-	db.Pieku.findOne({_id: piekuId}, function (err, pieku) {
-		pieku.author = authorId;
-
-		// save the updated post
-		pieku.save(function (err, pieku) {
-			res.json(pieku);
-		});
 	});
 });
 
@@ -173,6 +67,120 @@ app.delete('/api/piekus/:id', function (req, res) {
 		res.json(deletedPieku);
 	});
 });
+
+// create new pieku
+app.post('/api/piekus', function (req, res) {
+	// create an author record
+	var newAuthor = new db.Author ({
+		name: req.body.author
+	});
+
+	// save new author record
+	newAuthor.save()
+
+	// create new pieku with form data
+	var newPieku = new db.Pieku ({
+		title: req.body.title,
+		author: newAuthor._id,
+		line1: req.body.line1,
+		line2: req.body.line2,
+		line3: req.body.line3,
+		date: dateString,
+	});
+
+	// save new pieku in db
+	newPieku.save(function(err, savedPieku) {
+		res.json(savedPieku);
+	});
+});
+
+// get one pieku
+app.get('/api/piekus/:id', function (req, res) {
+	// set the value of the id
+	var targetId = req.params.id;
+
+	// find phrase in db by id
+	db.Pieku.findOne({_id: targetId}, function (err, foundPieku) {
+		res.json(foundPieku);
+	});
+});
+
+// defines date for piekus
+var dateString = (new Date()).toLocaleDateString("en-US");
+
+
+// AUTHOR ROUTES
+// get all authors
+app.get('/api/authors', function (req, res) {
+	// query db to find authors and send authors as json response
+	db.Author.find({}).exec(function (err, author) {
+		res.json(author)
+	});
+});
+
+// create a new author
+app.post('/api/authors', function (req, res) {
+		// create an author record
+	var newAuthor = new db.Author ({
+		name: req.body.name
+	});
+
+	// save new author record
+	newAuthor.save(function (err, author) {
+		// send as json response
+		res.json(newAuthor);
+	});
+});
+
+// specific author to specific post
+app.put('/api/piekus/:id/authors/:authorid', function (req, res) {
+	var authorId = req.params.authorid;
+	db.Author.findOne({_id: authorId});
+	var piekuId = req.params.id;
+	db.Pieku.findOne({_id: piekuId}, function (err, pieku) {
+		pieku.author = authorId;
+
+		// save the updated post
+		pieku.save(function (err, pieku) {
+			res.json(pieku);
+		});
+	});
+});
+
+
+// COMMENT ROUTES
+// create a new comment on pieku
+app.post('/api/piekus/:id/comments', function (req, res) {
+	// get the id of pieku
+	var postId = req.params.id;
+	// finds post based off of id
+	db.Pieku.findOne({_id: postId}).exec(function (err, pieku){
+		// create new comment record
+		var newComment = new db.Comment({
+			text: req.body.text 
+		});
+
+		// Push new comment into comments and save
+		pieku.comments.push(newComment._id);
+		pieku.save();
+		// send as JSON response
+		res.json(newComment);	
+	});
+	
+});
+
+// get comments on one pieku
+app.get('/api/piekus/:id/comments', function (req, res) {
+	// get the id of the pieku
+	var postId = req.params.id;
+
+	// find pieku by id
+	db.Pieku.findOne({_id: postId}).populate('comments').exec(function (err, pieku) {
+		res.json(pieku.comments);
+	});
+});
+
+
 
 app.listen(3000, function() {
 	console.log('Server started on localhost:3000');
