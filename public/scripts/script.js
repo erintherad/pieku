@@ -321,3 +321,8 @@ $(function() {
 	// 		$(this).attr('data-index', index);
 	// 	});
 	// });
+
+
+var Pieku = function(title, author, line) {
+	this.
+}

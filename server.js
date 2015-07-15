@@ -11,25 +11,11 @@ app.use(express.static(__dirname + '/public'));
 
 // configure bodyParser for handling data
 app.use(bodyParser.urlencoded({extended: true}));
-// defines date for piekus
-var dateString = (new Date()).toLocaleDateString("en-US");
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/pieku');
 
-var Pieku = require('./models/piekus');
-
-// var PiekuPost = require('mongoose').model('Pieku');
-// var piekus = Pieku.find().exec(function(err, piekus) {
-// 	console.log(piekus);
-// });
-
-// // pre-seeded phrase data
-// var piekus = [
-// 	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", line1: "When I look at it,", line2: "The circle becomes a slice,", line3: "I eat the whole pie.", date: dateString },
-// 	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", line1: "Oh pie in the sky,", line2: "You look too bright to eat now,", line3: "Oh what a full moon!", date: dateString },
-// 	{ id: 3, title:"Pie for no one" , author: "Annie Ross", line1: "Alone I stand here,", line2: "Hunger sounds from my stomach,", line3: "No pie to be found.", date: dateString }
-// ];	
+var db = require('./models/models');
 
 // ROUTES
 // root route (serves index.html)
@@ -38,23 +24,45 @@ app.get('/', function(req, res) {
 });
 
 // get all piekus
-app.get('/api/piekus', function(req, res) {
+app.get('/api/piekus', function (req, res) {
 	// find all piekus in db
-	Pieku.find(function(err, piekus) {
+	// db.Pieku.find({}, function(err, piekus) {
+	// 	res.json(piekus);
+	// });
+	db.Pieku.find({}).populate('author').exec(function (err, piekus) {
 		res.json(piekus);
 	});
 });
 
+// get all authors
+app.get('/api/authors', function (req, res) {
+	// query db to find authors and send authors as json response
+	db.Author.find({}).exec(function (err, author) {
+		res.json(author)
+	});
+});
+
+// defines date for piekus
+var dateString = (new Date()).toLocaleDateString("en-US");
+
 // create new pieku
-app.post('/api/piekus', function(req, res) {
-// create new pieku with form data
-	var newPieku = new Pieku ({
+app.post('/api/piekus', function (req, res) {
+	// create an author record
+	var newAuthor = new db.Author ({
+		name: req.body.author
+	});
+
+	// save new author record
+	newAuthor.save()
+
+	// create new pieku with form data
+	var newPieku = new db.Pieku ({
 		title: req.body.title,
-		author: req.body.author,
+		author: newAuthor._id,
 		line1: req.body.line1,
 		line2: req.body.line2,
 		line3: req.body.line3,
-		date: dateString
+		date: dateString,
 	});
 
 	// save new pieku in db
@@ -63,24 +71,84 @@ app.post('/api/piekus', function(req, res) {
 	});
 });
 
+// create a new author
+app.post('/api/authors', function (req, res) {
+		// create an author record
+	var newAuthor = new db.Author ({
+		name: req.body.name
+	});
+
+	// save new author record
+	newAuthor.save(function (err, author) {
+		// send as json response
+		res.json(newAuthor);
+	});
+});
+
+// create a new comment on pieku
+app.post('/api/piekus/:id/comments', function (req, res) {
+	// get the id of pieku
+	var postId = req.params.id;
+	// finds post based off of id
+	db.Pieku.findOne({_id: postId}).exec(function (err, pieku){
+		// create new comment record
+		var newComment = new db.Comment({
+			text: req.body.text 
+		});
+
+		// Push new comment into comments and save
+		pieku.comments.push(newComment._id);
+		pieku.save();
+		// send as JSON response
+		res.json(newComment);	
+	});
+	
+});
+
 // get one pieku
-app.get('/api/piekus/:id', function(req, res) {
+app.get('/api/piekus/:id', function (req, res) {
 	// set the value of the id
 	var targetId = req.params.id;
 
 	// find phrase in db by id
-	Pieku.findOne({_id: targetId}, function(err, foundPieku) {
+	db.Pieku.findOne({_id: targetId}, function (err, foundPieku) {
 		res.json(foundPieku);
 	});
 });
 
+// get comments on one pieku
+app.get('/api/piekus/:id/comments', function (req, res) {
+	// get the id of the pieku
+	var postId = req.params.id;
+
+	// find pieku by id
+	db.Pieku.findOne({_id: postId}).populate('comments').exec(function (err, pieku) {
+		res.json(pieku.comments);
+	});
+});
+
+// specific author to specific post
+app.put('/api/piekus/:id/authors/:authorid', function (req, res) {
+	var authorId = req.params.authorid;
+	db.Author.findOne({_id: authorId});
+	var piekuId = req.params.id;
+	db.Pieku.findOne({_id: piekuId}, function (err, pieku) {
+		pieku.author = authorId;
+
+		// save the updated post
+		pieku.save(function (err, pieku) {
+			res.json(pieku);
+		});
+	});
+});
+
 // update pieku
-app.put('/api/piekus/:id', function(req, res) {
+app.put('/api/piekus/:id', function (req, res) {
 	// set the value of the id
 	var targetId = req.params.id;
 
 	// find pieku in db by id
-	Pieku.findOne({_id: targetId}, function(err, foundPieku) {
+	db.Pieku.findOne({_id: targetId}, function (err, foundPieku) {
 		// update the pieku post
 		foundPieku.title = req.body.title;
 		foundPieku.author = req.body.author;
@@ -96,12 +164,12 @@ app.put('/api/piekus/:id', function(req, res) {
 });
 
 // delete pieku
-app.delete('/api/piekus/:id', function(req, res) {
+app.delete('/api/piekus/:id', function (req, res) {
 	// set the value of the id
 	var targetId = req.params.id;
 
 	// find pieku in db by id and remove
-	Pieku.findOneAndRemove({_id: targetId}, function (err, deletedPieku) {
+	db.Pieku.findOneAndRemove({_id: targetId}, function (err, deletedPieku) {
 		res.json(deletedPieku);
 	});
 });
@@ -113,6 +181,13 @@ app.listen(3000, function() {
 
 // OLD CODE
 
+
+// // pre-seeded phrase data
+// var piekus = [
+// 	{ id: 1, title:"For the love of pie" , author: "Erin Mahoney", line1: "When I look at it,", line2: "The circle becomes a slice,", line3: "I eat the whole pie.", date: dateString },
+// 	{ id: 2, title:"Pie in the sky" , author: "Bob Smith", line1: "Oh pie in the sky,", line2: "You look too bright to eat now,", line3: "Oh what a full moon!", date: dateString },
+// 	{ id: 3, title:"Pie for no one" , author: "Annie Ross", line1: "Alone I stand here,", line2: "Hunger sounds from my stomach,", line3: "No pie to be found.", date: dateString }
+// ];
 
 // pieku index
 // app.get('/api/piekus', function(req, res) {
