@@ -16,6 +16,10 @@ $(function() {
 
 		// compile pieku template
 		template: _.template($('#post-template').html()),
+
+		// compile comments template
+		commentTemplate: _.template($('#comment-template').html()),
+
 		// temp storing data for other functions
 		allPiekus: [],
 
@@ -45,6 +49,9 @@ $(function() {
 				allPiekus.push(data);
 				// pass pieku object through template and append to view
 				var $piekuHtml = $(piekuController.template(data));
+
+				// todo: add click event handler
+
 				$('#pieku-list-panel').prepend($piekuHtml);
 
 				// var $features = $(featuresTemplate());
@@ -122,7 +129,21 @@ $(function() {
 				// hides modal and give alert upon submit
 				$('#updateModal').modal('hide');
 
-			})
+			});
+
+			$('.pieku').on('click', function(event) {
+				console.log(event);
+				event.preventDefault();
+				var piekuId = $(this).attr('data-id');
+
+				$.get('/api/piekus/' + piekuId + '/comments', function(data) {
+					_.each(data, function(comment) {
+						//make render template for comment, add commment to page.
+						var $commentHtml = $(piekuController.commentTemplate(comment));
+						$('#comment-list-panel').append($commentHtml);
+					});
+				});
+			});
 
 			// for delete: click event on '.delete-pieku' button
 			$('#pieku-list-panel').on('click', '.delete-pieku', function(event) {
@@ -321,8 +342,3 @@ $(function() {
 	// 		$(this).attr('data-index', index);
 	// 	});
 	// });
-
-
-var Pieku = function(title, author, line) {
-	this.
-}

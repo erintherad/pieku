@@ -1,8 +1,14 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+var deepPopulate = require('mongoose-deep-populate');    
+
 // Comment schema on posts
 var CommentSchema = new Schema({
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'Author'
+  },
   text: String
 });
 
@@ -24,6 +30,8 @@ var PiekusSchema = new Schema({
   date: String,
   comments: [CommentSchema]
 });
+
+PiekusSchema.plugin(deepPopulate);
 
 var Pieku = mongoose.model('Pieku', PiekusSchema);
 var Comment = mongoose.model('Comment', CommentSchema);

@@ -28,9 +28,6 @@ app.get('/', function(req, res) {
 // get all piekus
 app.get('/api/piekus', function (req, res) {
 	// find all piekus in db
-	// db.Pieku.find({}, function(err, piekus) {
-	// 	res.json(piekus);
-	// });
 	db.Pieku.find({}).populate('author').exec(function (err, piekus) {
 		res.json(piekus);
 	});
@@ -76,21 +73,22 @@ app.post('/api/piekus', function (req, res) {
 	});
 
 	// save new author record
-	newAuthor.save()
+	newAuthor.save(function (err, savedAuthor) {
 
-	// create new pieku with form data
-	var newPieku = new db.Pieku ({
-		title: req.body.title,
-		author: newAuthor._id,
-		line1: req.body.line1,
-		line2: req.body.line2,
-		line3: req.body.line3,
-		date: dateString,
-	});
+		// create new pieku with form data
+		var newPieku = new db.Pieku ({
+			title: req.body.title,
+			author: savedAuthor,
+			line1: req.body.line1,
+			line2: req.body.line2,
+			line3: req.body.line3,
+			date: dateString,
+		});
 
-	// save new pieku in db
-	newPieku.save(function(err, savedPieku) {
-		res.json(savedPieku);
+		// save new pieku in db
+		newPieku.save(function(err, savedPieku) {
+			res.json(savedPieku);
+		});
 	});
 });
 
@@ -155,19 +153,34 @@ app.post('/api/piekus/:id/comments', function (req, res) {
 	var postId = req.params.id;
 	// finds post based off of id
 	db.Pieku.findOne({_id: postId}).exec(function (err, pieku){
-		// create new comment record
-		var newComment = new db.Comment({
-			text: req.body.text 
+		// create an author record
+		var newAuthor = new db.Author ({
+			name: req.body.author
 		});
 
-		// Push new comment into comments and save
-		pieku.comments.push(newComment._id);
-		pieku.save();
-		// send as JSON response
-		res.json(newComment);	
+		// save new author record
+		newAuthor.save(function (err, savedAuthor) {
+
+			// create new comment record
+			var newComment = new db.Comment({
+				author: savedAuthor,
+				text: req.body.text 
+			});
+
+			// save new pieku in db
+			newComment.save(function(err, savedComment) {
+				// Push new comment into comments and save
+				pieku.comments.push(savedComment);
+				pieku.save();
+
+				res.json(savedComment);
+			});	
+		});
 	});
 	
 });
+
+
 
 // get comments on one pieku
 app.get('/api/piekus/:id/comments', function (req, res) {
@@ -175,7 +188,7 @@ app.get('/api/piekus/:id/comments', function (req, res) {
 	var postId = req.params.id;
 
 	// find pieku by id
-	db.Pieku.findOne({_id: postId}).populate('comments').exec(function (err, pieku) {
+	db.Pieku.findOne({_id: postId}).deepPopulate('comments.author').exec(function (err, pieku) {
 		res.json(pieku.comments);
 	});
 });

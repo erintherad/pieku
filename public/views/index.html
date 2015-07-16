@@ -199,8 +199,22 @@
 			<!-- update modal window underscore template in list end -->
 			</div> 
 
-			<!-- Addition features of each post -->
-			<div class="col-md-2" id="features-list-panel"></div>
+			<!-- Additional comments of each post -->
+			<div class="col-md-2" id="comment-list-panel">
+				<script type="text/template" id="comment-template">
+					<div class="comment">
+						<a class="close delete delete-comment closeBtn" aria-label="delete comment"><span aria-hidden="true">
+							<span class="glyphicon glyphicon-remove-circle"></span>
+						</a>
+						<p>
+							<h4><%= author.name %></h4>
+						</p>
+						<p>
+							<span><%= text %> </span>
+						</p>
+					</div>
+				</script>
+			</div>
 
 			<!-- space -->
 			<div class="col-md-1"></div>
@@ -247,7 +261,7 @@
 						<h1><%= title %></h1>
 					</p>
 					<p>	
-						<span><%= author %></span>
+						<span><%= author.name %></span>
 					</p>
 					<p>
 						<span><%= date %></span>
